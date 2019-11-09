@@ -1,0 +1,145 @@
+<html>
+    <head>
+        <title>Project Pollution</title>
+        <meta charset=utf-8>
+        <link rel="stylesheet" type="text/css" href="./index.css">
+        <script>
+            var json_tiles = {{ js_data | safe }}
+            console.log(json_tiles);
+        </script>
+        <link href="https://fonts.googleapis.com/css?family=Heebo&display=swap" rel="stylesheet"> 
+<style>
+body{
+    background-color:#212f3d;
+    font-family: 'Heebo', sans-serif;
+    color: white;
+}
+.wrapper{
+    display:grid;
+    grid-template-columns: {% for tile in tiles %} {{ tile.percentage }}fr {% endfor %};
+    grid-auto-rows: 98vh;
+    grid-gap:0.3em;
+    justify-items:stretch;
+    align-items:stretch;
+}
+
+.wrapper > div{
+    background:#00FF00;
+    padding:1em;
+    border-radius: 4px;
+    word-wrap: break-word;
+    justify-items:center;
+    align-items:center;
+    text-align: center;
+    padding-top: 30vh;
+    
+    background-color: rgba(0,0,0,.5);
+}
+
+    button, input[type="submit"]{
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
+    outline: inherit;
+}
+    .name{
+        font-weight: bold;
+    }
+    .m{
+        width: 97vw;
+        background-color: rgba(0,0,0,.8);
+        text-align: center;
+        border-radius: 5px;
+        margin: 5px;
+        padding: 5px;
+    }
+</style>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        {% if can_go_back %}
+            <div>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="name" value="{{ back_sheet_name }}" />
+                <p><button type="submit" class="m">Back</button></p>
+            </form>
+
+            <form method="POST" >
+                {% csrf_token %}
+                <input type="hidden" name="name" value="Main" />
+                <p><button type="submit" class="m">Home</button></p>
+            </form>
+            </div>
+
+        {% endif %}
+    <div class=wrapper>
+        {% for tile in tiles %}
+    
+        <div class="tile" id="{{ tile.name }}" onload="setbackground('{{ tile.name }}')">
+           {% if tile.clickable %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ tile.name }}" />
+                    <button type="Submit">
+                        {% endif %}
+            <p class="name">{{ tile.name }}</p>
+            <p class="percentage">{{ tile.percentage }}%</p>
+            <p class="img"><img width="50px" height="50px" src="{{ tile.image_url }}"/></p>
+            {% if tile.clickable %}
+                    </button>
+                </form>
+                     {% endif %}
+        </div>
+        
+        {% endfor %}
+        </div>
+        <a style="color:white" href="/solutions">Solutions</a>
+        <a style="color:white" href="/credits">Credits</a>
+    <script>
+
+        var x1=0; var y1=0; var z1=0;
+var x2; var y2; var z2;
+var x; var y; var z;
+var i=0;
+
+function change() {
+  document.body.style.backgroundColor=`rgb(${x},${y},${z})`;
+
+}
+
+function looper (k) {
+  setTimeout ( function() {
+    x=Math.round(x1+(k%25)*(x2-x1)/25);
+    y=Math.round(y1+(k%25)*(y2-y1)/25);
+    z=Math.round(z1+(k%25)*(z2-z1)/25);
+    change();
+  //  document.body.innerHTML+=`${k}` +" " + `rgb(${x1},${y1},${z1})`  +" "+`rgb(${x2},${y2},${z2})`  +" "+`rgb(${x},${y},${z})`+"<br>";
+  }, 0)
+  i++;
+  setTimeout( function() {
+    number();
+  },80)
+   }
+
+function number()  {  
+  //if (i<1500) { 
+  if(i>=0) {
+  if (i>=25 && ((i%25)==0)) {x1=x2; y1=y2; z1=z2;}
+  if ((i%25)==0) {
+             x2=Math.round(Math.random()*255);
+             y2=Math.round(Math.random()*255);
+             z2=Math.round(Math.random()*255);
+
+                 }
+  looper(i);
+}
+}
+
+number();
+    </script>
+    </body>
+</html>

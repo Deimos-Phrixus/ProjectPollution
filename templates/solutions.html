@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <title>Project Pollution - Solving it</title>
+        <style>
+            body{
+    background-color:#212f3d;
+    font-family: 'Heebo', sans-serif;
+    color: #EAECEE;
+}
+
+
+    button, input[type="submit"]{
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
+    outline: inherit;
+    color: white;
+}
+div{
+                background-color: rgba(0,0,0,.5);
+                border-radius: 5px;
+                padding: 8px;
+                padding-left: 50px;
+            }
+    .m{
+        width: 97vw;
+        background-color: rgba(0,0,0,.8);
+        text-align: center;
+        border-radius: 5px;
+        margin: 5px;
+        padding: 5px;
+    }
+
+        </style>
+    </head>
+    <body>
+        <button class="m"><a style="color:white; text-decoration: none;" href="/">Home</a></button>
+        <div>
+        <p>We have shared some ways on how can we help reduce the percentage of the pollution caused by this catgory</p>
+        <h2>Water Pollution</h2>
+        <ul>
+            <li>Ensure minimal use of bleach or detergents</li>
+            <li>Dispose trash properly</li>
+            <li>Use super energy saving washing machines</li>
+            <li>Skip the use of plastics</li>
+            <li>Only do laundry when you have full load</li>
+        </ul>
+        <h2>Noise Pollution</h2>
+        <ul>
+            <li>Turn off the electronic or reduce the volume</li>
+            <li>Plant trees</li>
+            <li>Declaring a "no horn zone"</li>
+        </ul>
+        <h2>Light Pollution</h2>
+        <ul>
+            <li>Mimise use of lights</li>
+            <li>Colored lights can be used as an option</li>
+            <li>Reduce the use of decorative light in events</li>
+            <li>Replace lights with low-glare alternatives</li>
+        </ul>
+        <h2>Air Pollution</h2>
+        <ul>
+            <li>Use public transportation</li>
+            <li>Use Natural Gas instead of Charcoal</li>
+            <li>Use Recylable products</li>
+            <li>Quit Smoking</li>
+            <li>Eat Organic Food</li>
+        </ul>
+        <h2>Soil Pollution</h2>
+        <ul>
+            <li>PLANT TREES</li>
+            <li>Use natural alternatives that decomposes</li>
+            <li>Buy more organic goods</li>
+        </ul>
+        <script>
+                // Code brought and modified from 
+                // Ivang G. https://codepen.io/Zyxoman/pen/XZrJXz
+                        var x1=0; var y1=0; var z1=0;
+                var x2; var y2; var z2;
+                var x; var y; var z;
+                var i=0;
+                
+                function change() {
+                  document.body.style.backgroundColor=`rgb(${x},${y},${z})`;
+                
+                }
+                
+                function looper (k) {
+                  setTimeout ( function() {
+                    x=Math.round(x1+(k%25)*(x2-x1)/25);
+                    y=Math.round(y1+(k%25)*(y2-y1)/25);
+                    z=Math.round(z1+(k%25)*(z2-z1)/25);
+                    change();
+                  //  document.body.innerHTML+=`${k}` +" " + `rgb(${x1},${y1},${z1})`  +" "+`rgb(${x2},${y2},${z2})`  +" "+`rgb(${x},${y},${z})`+"<br>";
+                  }, 0)
+                  i++;
+                  setTimeout( function() {
+                    number();
+                  },80)
+                   }
+                
+                function number()  {  
+                  //if (i<1500) { 
+                  if(i>=0) {
+                  if (i>=25 && ((i%25)==0)) {x1=x2; y1=y2; z1=z2;}
+                  if ((i%25)==0) {
+                             x2=Math.round(Math.random()*255);
+                             y2=Math.round(Math.random()*255);
+                             z2=Math.round(Math.random()*255);
+                
+                                 }
+                  looper(i);
+                }
+                }
+                
+                number();
+                    </script>
+                    </div>
+    </body>
+</html>
